@@ -1,7 +1,7 @@
 use std::cmp::Ordering::{self, Less, Greater, Equal};
 use std::{u8, u64};
 use std::marker::PhantomData;
-use std::ops::Add;
+use std::ops::{Add, AddAssign};
 use fixed_sizes::BitLength;
 use num::traits::{Zero, One, Unsigned};
 
@@ -318,3 +318,18 @@ impl<'a, B> Add<&'a FixedBigUint<B>> for FixedBigUint<B> where B: BitLength {
     }
 }
 
+impl<'a, B> AddAssign<&'a FixedBigUint<B>> for FixedBigUint<B> where B: BitLength {
+
+    #[allow(unused_variables)]
+    fn add_assign(&mut self, other: &'a FixedBigUint<B>) {
+        let carry = __add_assign(&mut self.data[..], &other.data[..], self.mask);
+    }
+}
+
+impl<B> AddAssign<FixedBigUint<B>> for FixedBigUint<B> where B: BitLength {
+
+    #[allow(unused_variables)]
+    fn add_assign(&mut self, other: FixedBigUint<B>) {
+        let carry = __add_assign(&mut self.data[..], &other.data[..], self.mask);
+    }
+}
