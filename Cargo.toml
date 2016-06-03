@@ -1,0 +1,8 @@
+[package]
+name = "fixed-num"
+version = "0.1.0"
+authors = ["Stallmanifold <stallmanifold@gmail.com>"]
+
+[dependencies]
+num  = "0.1.32"
+rand = "0.3.14"
